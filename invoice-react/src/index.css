@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap');
 
+/* ── CSS Variables ─────────────────────────────────────── */
 :root {
   --purple:      #7B5EA7;
   --purple-dark: #5A3E85;
@@ -18,8 +19,11 @@ body {
   font-family: 'DM Sans', sans-serif;
   background: var(--bg);
   min-height: 100vh;
-  padding: 30px 16px;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   VERSI LAMA — PORTRAIT (masih aktif jika dipakai)
+   ═══════════════════════════════════════════════════════════ */
 
 /* ── TOOLBAR ── */
 .toolbar {
@@ -29,6 +33,7 @@ body {
   gap: 10px;
   flex-wrap: wrap;
   justify-content: flex-end;
+  padding: 20px 16px 0;
 }
 
 .btn {
@@ -44,11 +49,15 @@ body {
 .btn:hover  { opacity: .88; transform: translateY(-1px); }
 .btn:active { transform: translateY(0); }
 .btn-dark  { background: var(--purple-dark); color: var(--white); }
-.btn-white { background: var(--white); color: var(--purple-dark); border: 1.5px solid var(--purple); }
+.btn-white {
+  background: var(--white);
+  color: var(--purple-dark);
+  border: 1.5px solid var(--purple);
+}
 .btn-white:hover { background: var(--bg); }
-.btn-red   { background: var(--orange); color: var(--white); }
+.btn-red { background: var(--orange); color: var(--white); }
 
-/* ── INVOICE WRAPPER ── */
+/* ── INVOICE WRAPPER (portrait) ── */
 .invoice {
   max-width: 900px;
   margin: 0 auto;
@@ -57,17 +66,10 @@ body {
   box-shadow: 0 8px 40px rgba(123, 94, 167, .18);
   border-top: 5px solid var(--purple);
 }
+.invoice > * { margin-bottom: 24px; }
+.invoice > *:last-child { margin-bottom: 0; }
 
-.invoice > * {
-  margin-bottom: 24px;
-}
-
-.invoice > *:last-child {
-  margin-bottom: 0;
-}
 /* ── HEADER ── */
-/* === HEADER BARU 2 KOLOM === */
-
 .inv-header {
   position: relative;
   display: grid;
@@ -76,51 +78,25 @@ body {
   margin-bottom: 24px;
   gap: 20px;
 }
-
-/* label faktur */
 .invoice-label {
   position: absolute;
-  top: -35px;   /* naik ke atas mendekati garis ungu */
-  left: -40px;  /* geser ke kiri keluar padding */
+  top: -35px;
+  left: -40px;
   font-size: 11px;
   letter-spacing: 2px;
   font-weight: 600;
   color: var(--gray-text);
 }
-/* kiri */
-.header-left {
-  display: flex;
-  align-items: center;
-}
-
-/* kanan */
-.header-right {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-}
-
-/* ini kunci biar sejajar tabel */
+.header-left  { display: flex; align-items: center; }
+.header-right { display: flex; justify-content: flex-end; align-items: flex-start; }
 .header-right .company-info {
   width: 100%;
   max-width: 360px;
   margin-top: 16px;
   margin-bottom: 8px;
 }
-
-.logo-area {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.logo-img {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-
+.logo-area  { display: flex; align-items: center; gap: 14px; }
+.logo-img   { width: 80px; height: 80px; object-fit: contain; flex-shrink: 0; }
 .company-name {
   font-family: 'Playfair Display', serif;
   font-size: 22px;
@@ -128,20 +104,6 @@ body {
   color: var(--purple-dark);
   font-weight: 700;
 }
-
-.faktur-badge {
-  background: var(--purple-dark);
-  color: var(--white);
-  font-family: 'Playfair Display', serif;
-  font-size: 17px;
-  font-weight: 700;
-  text-align: center;
-  padding: 14px 28px;
-  letter-spacing: 1px;
-  line-height: 1.3;
-  border-radius: 4px;
-}
-
 .company-info {
   margin-top: 14px;
   display: grid;
@@ -159,14 +121,12 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 24px;
 }
-
 .box-border {
   border: 1.5px solid var(--gray-mid);
   padding: 18px 22px;
   border-radius: 6px;
 }
 .box-border.accent-left { border-left: 3px solid var(--purple); }
-
 .meta-label {
   font-size: 11px;
   font-weight: 600;
@@ -175,7 +135,6 @@ body {
   color: var(--blue-purple);
   margin-bottom: 6px;
 }
-
 .client-name-display {
   font-family: 'Playfair Display', serif;
   font-size: 22px;
@@ -183,14 +142,12 @@ body {
   margin-bottom: 4px;
   font-weight: 700;
 }
-
 .client-address {
   font-size: 13px;
   color: var(--gray-text);
   margin-bottom: 14px;
   display: block;
 }
-
 .meta-row {
   display: grid;
   grid-template-columns: 110px 1fr;
@@ -199,11 +156,10 @@ body {
   margin-bottom: 8px;
   font-size: 13px;
 }
-.meta-row .lbl         { font-weight: 600; color: var(--purple-dark); }
-.due-date-row .lbl     { font-weight: 700; color: var(--orange); }
-.due-date-row input    { font-weight: 700; color: var(--orange); }
-
-.payment-box { margin-top: 16px; }
+.meta-row .lbl     { font-weight: 600; color: var(--purple-dark); }
+.due-date-row .lbl { font-weight: 700; color: var(--orange); }
+.due-date-row input { font-weight: 700; color: var(--orange); }
+.payment-box   { margin-top: 16px; }
 .payment-title {
   font-weight: 700;
   font-size: 13px;
@@ -231,7 +187,6 @@ body {
 }
 .inv-table th.right,  .inv-table td.right  { text-align: right; }
 .inv-table th.center, .inv-table td.center { text-align: center; }
-
 .inv-table tbody tr:nth-child(even) { background: var(--gray-light); }
 .inv-table tbody tr { border-bottom: 1px solid var(--gray-mid); }
 .inv-table tbody tr:last-child { border-bottom: 2px solid var(--purple); }
@@ -241,7 +196,6 @@ body {
   color: #333;
   vertical-align: middle;
 }
-
 .harga-wrap {
   display: flex;
   align-items: center;
@@ -250,7 +204,6 @@ body {
 }
 .harga-wrap .rp-label { font-size: 12px; color: #999; flex-shrink: 0; }
 .harga-wrap .harga-input { text-align: right; width: 120px; }
-
 .add-row-btn {
   display: inline-block;
   margin-bottom: 24px;
@@ -265,7 +218,6 @@ body {
   transition: border-color .2s, color .2s, background .2s;
 }
 .add-row-btn:hover { border-color: var(--purple); color: var(--purple); background: var(--gray-light); }
-
 .del-row {
   background: none;
   border: none;
@@ -285,16 +237,6 @@ body {
   padding-top: 24px;
   align-items: start;
 }
-
-.syarat { font-size: 12px; color: var(--gray-text); line-height: 1.6; }
-.syarat-title {
-  font-weight: 700;
-  font-size: 13px;
-  color: var(--purple-dark);
-  margin-bottom: 8px;
-  text-transform: uppercase;
-}
-
 .totals { display: flex; flex-direction: column; gap: 8px; }
 .total-row {
   display: flex;
@@ -312,7 +254,6 @@ body {
   font-size: 17px;
   color: var(--purple-dark);
 }
-
 .signature-area { margin-top: 32px; text-align: center; }
 .sig-line {
   border-bottom: 1.5px solid var(--purple);
@@ -321,6 +262,7 @@ body {
 }
 
 /* ── INPUT FIELD ── */
+/* Tidak ada underline — hanya highlight lembut saat hover & focus */
 input.field {
   border: none;
   outline: none;
@@ -330,24 +272,96 @@ input.field {
   color: inherit;
   font-weight: inherit;
   width: 100%;
-  border-radius: 2px;
-  transition: background .15s;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: background 0.15s;
 }
-input.field:hover { background: rgba(123, 94, 167, .07); }
-input.field:focus { background: rgba(123, 94, 167, .12); outline: 1.5px dashed var(--purple); }
+input.field:hover { background: rgba(123, 94, 167, 0.06); }
+input.field:focus { background: rgba(123, 94, 167, 0.11); outline: 1.5px solid rgba(123, 94, 167, 0.3); }
 input.field.right  { text-align: right; }
 input.field.center { text-align: center; }
 
-/* ── PRINT ── */
-@media print {
-  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-  body { background: white; padding: 0; }
-  .toolbar { display: none; }
-  .invoice { box-shadow: none; padding: 32px; max-width: 100%; }
-  .add-row-btn, .del-row { display: none !important; }
-  input.field { background: transparent !important; outline: none !important; }
+/* ═══════════════════════════════════════════════════════════
+   VERSI BARU — LANDSCAPE (sidebar + faktur landscape)
+   ═══════════════════════════════════════════════════════════ */
+
+/* Scroll area & kertas — supaya bisa di-override dari React */
+.invoice-scroll-area {
+  background: var(--bg);
 }
 
-/* end of invoice */
+/* Hover & focus untuk inline-style inputs di versi landscape */
+.inv-ls input {
+  border: none;
+  outline: none;
+  background: transparent;
+  border-radius: 3px;
+  transition: background 0.15s;
+  font-family: 'DM Sans', sans-serif;
+}
+.inv-ls input:hover { background: rgba(123, 94, 167, 0.06); }
+.inv-ls input:focus { background: rgba(123, 94, 167, 0.11); outline: 1.5px solid rgba(123, 94, 167, 0.3); }
 
+/* Sidebar tombol — hover state tambahan */
+.sidebar-no-print button:hover {
+  filter: brightness(1.2);
+}
 
+/* ═══════════════════════════════════════════════════════════
+   PRINT — berlaku untuk KEDUA versi
+   ═══════════════════════════════════════════════════════════ */
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Sembunyikan elemen UI */
+  .toolbar,
+  .sidebar-no-print,
+  .add-row-btn,
+  .del-row {
+    display: none !important;
+  }
+
+  /* Reset body */
+  body {
+    background: white;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Portrait versi lama */
+  .invoice {
+    box-shadow: none;
+    padding: 32px;
+    max-width: 100%;
+    border-top: 5px solid var(--purple-dark);
+  }
+
+  /* Landscape versi baru */
+  .invoice-scroll-area {
+    padding: 0 !important;
+    background: white !important;
+    display: block !important;
+  }
+  .invoice-paper {
+    box-shadow: none !important;
+    width: 100% !important;
+    min-height: unset !important;
+    padding: 20mm 18mm !important;
+  }
+
+  /* Input fields: no highlight saat print */
+  input.field,
+  .inv-ls input {
+    background: transparent !important;
+    outline: none !important;
+  }
+
+  /* Page size landscape untuk versi baru */
+  @page {
+    size: A4 landscape;
+    margin: 10mm;
+  }
+}
