@@ -83,7 +83,7 @@ export default function Invoice() {
   const saveData = useCallback(() => {
     const data = { company, client, invInfo, payment, rows, pajakPct, diskonPct, footer, nextId };
     localStorage.setItem('invoice_react', JSON.stringify(data));
-    alert('✅ Data invoice berhasil disimpan!');
+    alert(' Data invoice berhasil disimpan!');
   }, [company, client, invInfo, payment, rows, pajakPct, diskonPct, footer, nextId]);
 
   const loadData = useCallback(() => {
