@@ -58,15 +58,54 @@ body {
   border-top: 5px solid var(--purple);
 }
 
+.invoice > * {
+  margin-bottom: 24px;
+}
+
+.invoice > *:last-child {
+  margin-bottom: 0;
+}
 /* ── HEADER ── */
+/* === HEADER BARU 2 KOLOM === */
+
 .inv-header {
+  position: relative;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr 1fr;
   align-items: start;
-  margin-bottom: 36px;
-  border-bottom: 2px solid var(--gray-mid);
-  padding-bottom: 28px;
-  gap: 24px;
+  margin-bottom: 24px;
+  gap: 20px;
+}
+
+/* label faktur */
+.invoice-label {
+  position: absolute;
+  top: -35px;   /* naik ke atas mendekati garis ungu */
+  left: -40px;  /* geser ke kiri keluar padding */
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  color: var(--gray-text);
+}
+/* kiri */
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+/* kanan */
+.header-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+/* ini kunci biar sejajar tabel */
+.header-right .company-info {
+  width: 100%;
+  max-width: 360px;
+  margin-top: 16px;
+  margin-bottom: 8px;
 }
 
 .logo-area {
@@ -119,7 +158,6 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
-  margin-bottom: 32px;
 }
 
 .box-border {

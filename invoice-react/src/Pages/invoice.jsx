@@ -8,40 +8,38 @@ const fmt = (n) =>
 
 // ── Data awal invoice ──────────────────────────────────────
 const DEFAULT_COMPANY = {
-  name:    'PT. Putri Jagad Raya\nJaya Abadi',
-  alamat:  '123 Anywhere St., Any City, ST 12345',
-  telp:    '+123-456-7890',
-  mail:    'hello@putrijagad.com',
-  web:     'www.putrijagad.com',
+  name: 'PT. Putri Jagad Raya\nJaya Abadi',
+  alamat: '123 Anywhere St., Any City, ST 12345',
+  telp: '+123-456-7890',
+  mail: 'hello@putrijagad.com',
+  web: 'www.putrijagad.com',
 };
 
 const DEFAULT_CLIENT = {
-  name:    'Sacha Dubois',
+  name: 'Sacha Dubois',
   address: '123 Anywhere St., Any City,\nST 12345',
-  telp:    '+123-456-7890',
-  mail:    'hello@reallygreatsite.com',
-  web:     'www.reallygreatsite.com',
+  telp: '+123-456-7890',
+  mail: 'hello@reallygreatsite.com',
+  web: 'www.reallygreatsite.com',
 };
 
 const DEFAULT_INVOICE = {
-  noFaktur:   'inv-1234567890',
-  tanggal:    '2026-12-12',
+  noFaktur: 'inv-1234567890',
+  tanggal: '2026-12-12',
   jatuhTempo: '2026-12-17',
 };
 
 const DEFAULT_PAYMENT = {
-  note:      'Silahkan transfer ke rekening',
-  atasNama:  'PT. Putri Jagad Raya Jaya Abadi',
-  namaBank:  'Bank Kota Borcelle',
-  noRek:     '#123/456/7890',
+  note: 'Silahkan transfer ke rekening',
+  atasNama: 'PT. Putri Jagad Raya Jaya Abadi',
+  namaBank: 'Bank Kota Borcelle',
+  noRek: '#123/456/7890',
 };
 
 const DEFAULT_ROWS = [
-  { id: 1, desc: 'Sesi fotografi',   qty: 1, harga: 15000000 },
-  { id: 2, desc: 'Paket fotografi',  qty: 1, harga: 1000000  },
-  { id: 3, desc: '8 x10 cetak foto', qty: 5, harga: 1000000  },
-  { id: 4, desc: 'Foto album',       qty: 2, harga: 1000000  },
-  { id: 5, desc: 'Bingkai 12 x 12',  qty: 2, harga: 1000000  },
+  { id: 1, desc: 'Barang A', qty: 1, harga: 15000000 },
+  { id: 2, desc: 'Barang B', qty: 1, harga: 1000000 },
+  { id: 3, desc: 'Barang C', qty: 5, harga: 1000000 },
 ];
 
 const DEFAULT_FOOTER = {
@@ -51,20 +49,20 @@ const DEFAULT_FOOTER = {
 
 // ── Komponen utama ─────────────────────────────────────────
 export default function Invoice() {
-  const [company,  setCompany]  = useState(DEFAULT_COMPANY);
-  const [client,   setClient]   = useState(DEFAULT_CLIENT);
-  const [invInfo,  setInvInfo]  = useState(DEFAULT_INVOICE);
-  const [payment,  setPayment]  = useState(DEFAULT_PAYMENT);
-  const [rows,     setRows]     = useState(DEFAULT_ROWS);
+  const [company, setCompany] = useState(DEFAULT_COMPANY);
+  const [client, setClient] = useState(DEFAULT_CLIENT);
+  const [invInfo, setInvInfo] = useState(DEFAULT_INVOICE);
+  const [payment, setPayment] = useState(DEFAULT_PAYMENT);
+  const [rows, setRows] = useState(DEFAULT_ROWS);
   const [pajakPct, setPajakPct] = useState(11);
-  const [diskonPct,setDiskonPct]= useState(0);
-  const [footer,   setFooter]   = useState(DEFAULT_FOOTER);
-  const [nextId,   setNextId]   = useState(6);
+  const [diskonPct, setDiskonPct] = useState(0);
+  const [footer, setFooter] = useState(DEFAULT_FOOTER);
+  const [nextId, setNextId] = useState(6);
 
   // ── Kalkulasi ────────────────────────────────────────────
   const subTotal = rows.reduce((s, r) => s + r.qty * r.harga, 0);
-  const pajak    = subTotal * pajakPct  / 100;
-  const diskon   = subTotal * diskonPct / 100;
+  const pajak = subTotal * pajakPct / 100;
+  const diskon = subTotal * diskonPct / 100;
   const grandTotal = subTotal + pajak - diskon;
 
   // ── Baris tabel ──────────────────────────────────────────
@@ -92,30 +90,16 @@ export default function Invoice() {
     const raw = localStorage.getItem('invoice_react');
     if (!raw) { alert('Belum ada data tersimpan.'); return; }
     const d = JSON.parse(raw);
-    setCompany(d.company   ?? DEFAULT_COMPANY);
-    setClient(d.client     ?? DEFAULT_CLIENT);
-    setInvInfo(d.invInfo   ?? DEFAULT_INVOICE);
-    setPayment(d.payment   ?? DEFAULT_PAYMENT);
-    setRows(d.rows         ?? DEFAULT_ROWS);
+    setCompany(d.company ?? DEFAULT_COMPANY);
+    setClient(d.client ?? DEFAULT_CLIENT);
+    setInvInfo(d.invInfo ?? DEFAULT_INVOICE);
+    setPayment(d.payment ?? DEFAULT_PAYMENT);
+    setRows(d.rows ?? DEFAULT_ROWS);
     setPajakPct(d.pajakPct ?? 11);
     setDiskonPct(d.diskonPct ?? 0);
-    setFooter(d.footer     ?? DEFAULT_FOOTER);
-    setNextId(d.nextId     ?? 6);
+    setFooter(d.footer ?? DEFAULT_FOOTER);
+    setNextId(d.nextId ?? 6);
   }, []);
-
-  const resetData = () => {
-    if (!confirm('Reset ke data awal?')) return;
-    localStorage.removeItem('invoice_react');
-    setCompany(DEFAULT_COMPANY);
-    setClient(DEFAULT_CLIENT);
-    setInvInfo(DEFAULT_INVOICE);
-    setPayment(DEFAULT_PAYMENT);
-    setRows(DEFAULT_ROWS);
-    setPajakPct(11);
-    setDiskonPct(0);
-    setFooter(DEFAULT_FOOTER);
-    setNextId(6);
-  };
 
   // Auto-load saat pertama buka
   useEffect(() => {
@@ -135,8 +119,7 @@ export default function Invoice() {
         <button className="btn btn-white" onClick={addRow}>+ Tambah Item</button>
         <button className="btn btn-white" onClick={saveData}>💾 Simpan</button>
         <button className="btn btn-white" onClick={loadData}>📂 Muat</button>
-        <button className="btn btn-red"   onClick={resetData}>↺ Reset</button>
-        <button className="btn btn-dark"  onClick={() => window.print()}>🖨️ Cetak / PDF</button>
+        <button className="btn btn-dark" onClick={() => window.print()}>🖨️ Cetak / PDF</button>
       </div>
 
       {/* INVOICE */}
@@ -144,30 +127,38 @@ export default function Invoice() {
 
         {/* ── HEADER ── */}
         <div className="inv-header">
-          <div>
+
+          {/* label kecil */}
+          <div className="invoice-label">FAKTUR</div>
+
+          {/* kiri */}
+          <div className="header-left">
             <div className="logo-area">
-              <img className="logo-img" src={logo} alt="Logo PT. Putri Jagad Raya Jaya Abadi" />
-              <div className="company-name">
-                <input
-                  className="field"
-                  value={company.name}
-                  onChange={upd(setCompany)('name')}
-                  style={{ fontSize: '22px', fontFamily: 'Playfair Display, serif', fontWeight: 700, color: 'var(--purple-dark)' }}
-                />
+              <img className="logo-img" src={logo} alt="Logo PT" />
+
+              <div className="company-name" style={{ whiteSpace: 'pre-line' }}>
+                {company.name}
               </div>
             </div>
+          </div>
+
+          {/* kanan */}
+          <div className="header-right">
             <div className="company-info">
               <span className="lbl">Alamat</span>
               <input className="field" value={company.alamat} onChange={upd(setCompany)('alamat')} />
+
               <span className="lbl">Telp</span>
-              <input className="field" value={company.telp}   onChange={upd(setCompany)('telp')} />
+              <input className="field" value={company.telp} onChange={upd(setCompany)('telp')} />
+
               <span className="lbl">Mail</span>
-              <input className="field" value={company.mail}   onChange={upd(setCompany)('mail')} />
+              <input className="field" value={company.mail} onChange={upd(setCompany)('mail')} />
+
               <span className="lbl">Web</span>
-              <input className="field" value={company.web}    onChange={upd(setCompany)('web')} />
+              <input className="field" value={company.web} onChange={upd(setCompany)('web')} />
             </div>
           </div>
-          <div className="faktur-badge">FAKTUR<br />PEMBAYARAN</div>
+
         </div>
 
         {/* ── BILLING + META ── */}
@@ -194,20 +185,20 @@ export default function Invoice() {
               <span className="lbl">Mail</span>
               <input className="field" value={client.mail} onChange={upd(setClient)('mail')} />
               <span className="lbl">Web</span>
-              <input className="field" value={client.web}  onChange={upd(setClient)('web')} />
+              <input className="field" value={client.web} onChange={upd(setClient)('web')} />
             </div>
           </div>
 
           {/* Kanan: Nomor Faktur + Metode Bayar */}
           <div>
-            <div className="box-border" style={{ marginBottom: 16 }}>
+            <div className="box-border">
               <div className="meta-row">
                 <span className="lbl">Nomer Faktur</span>
-                <input className="field" value={invInfo.noFaktur}   onChange={upd(setInvInfo)('noFaktur')} />
+                <input className="field" value={invInfo.noFaktur} onChange={upd(setInvInfo)('noFaktur')} />
               </div>
               <div className="meta-row">
                 <span className="lbl">Tanggal</span>
-                <input className="field" type="date" value={invInfo.tanggal}    onChange={upd(setInvInfo)('tanggal')} />
+                <input className="field" type="date" value={invInfo.tanggal} onChange={upd(setInvInfo)('tanggal')} />
               </div>
               <div className="meta-row due-date-row">
                 <span className="lbl">Jatuh Tempo</span>
@@ -229,7 +220,7 @@ export default function Invoice() {
                 <span className="lbl">Nama Bank</span>
                 <input className="field" value={payment.namaBank} onChange={upd(setPayment)('namaBank')} />
                 <span className="lbl">No Rek</span>
-                <input className="field" value={payment.noRek}    onChange={upd(setPayment)('noRek')} />
+                <input className="field" value={payment.noRek} onChange={upd(setPayment)('noRek')} />
               </div>
             </div>
           </div>
