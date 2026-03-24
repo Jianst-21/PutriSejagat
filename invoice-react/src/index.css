@@ -1,17 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap');
 
 :root {
-  /* ── Palet warna dari logo PT. Putri Jagad Raya Jaya Abadi ── */
   --purple:      #7B5EA7;
   --purple-dark: #5A3E85;
   --orange:      #E8874A;
   --blue-purple: #7B86C8;
-
-  --white:      #ffffff;
-  --bg:         #F0EDF6;
-  --gray-mid:   #DDD6EC;
-  --gray-text:  #6B6080;
-  --gray-light: #F7F4FB;
+  --white:       #ffffff;
+  --bg:          #F0EDF6;
+  --gray-mid:    #DDD6EC;
+  --gray-text:   #6B6080;
+  --gray-light:  #F7F4FB;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,7 +22,7 @@ body {
 }
 
 /* ── TOOLBAR ── */
-#toolbar {
+.toolbar {
   max-width: 900px;
   margin: 0 auto 20px;
   display: flex;
@@ -45,14 +43,13 @@ body {
 }
 .btn:hover  { opacity: .88; transform: translateY(-1px); }
 .btn:active { transform: translateY(0); }
-
 .btn-dark  { background: var(--purple-dark); color: var(--white); }
 .btn-white { background: var(--white); color: var(--purple-dark); border: 1.5px solid var(--purple); }
 .btn-white:hover { background: var(--bg); }
 .btn-red   { background: var(--orange); color: var(--white); }
 
 /* ── INVOICE WRAPPER ── */
-#invoice {
+.invoice {
   max-width: 900px;
   margin: 0 auto;
   background: var(--white);
@@ -90,9 +87,9 @@ body {
   font-size: 22px;
   line-height: 1.25;
   color: var(--purple-dark);
+  font-weight: 700;
 }
 
-/* Badge FAKTUR — ungu solid */
 .faktur-badge {
   background: var(--purple-dark);
   color: var(--white);
@@ -115,10 +112,9 @@ body {
   font-size: 13px;
   color: var(--gray-text);
 }
-
 .company-info .lbl { font-weight: 600; color: var(--purple-dark); }
 
-/* ── BILLING + INVOICE META ── */
+/* ── BILLING + META ── */
 .inv-meta {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -131,10 +127,7 @@ body {
   padding: 18px 22px;
   border-radius: 6px;
 }
-
-.box-border.accent-left {
-  border-left: 3px solid var(--purple);
-}
+.box-border.accent-left { border-left: 3px solid var(--purple); }
 
 .meta-label {
   font-size: 11px;
@@ -150,6 +143,14 @@ body {
   font-size: 22px;
   color: var(--purple-dark);
   margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.client-address {
+  font-size: 13px;
+  color: var(--gray-text);
+  margin-bottom: 14px;
+  display: block;
 }
 
 .meta-row {
@@ -160,10 +161,9 @@ body {
   margin-bottom: 8px;
   font-size: 13px;
 }
-
-.meta-row .lbl { font-weight: 600; color: var(--purple-dark); }
-.due-date-row .lbl  { font-weight: 700; color: var(--orange); }
-.due-date-row input { font-weight: 700; color: var(--orange); }
+.meta-row .lbl         { font-weight: 600; color: var(--purple-dark); }
+.due-date-row .lbl     { font-weight: 700; color: var(--orange); }
+.due-date-row input    { font-weight: 700; color: var(--orange); }
 
 .payment-box { margin-top: 16px; }
 .payment-title {
@@ -181,15 +181,9 @@ body {
 .inv-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 }
-
-/* Header tabel — ungu solid */
-.inv-table thead tr {
-  background: var(--purple-dark);
-  color: var(--white);
-}
-
+.inv-table thead tr { background: var(--purple-dark); color: var(--white); }
 .inv-table th {
   padding: 12px 16px;
   font-size: 13px;
@@ -197,14 +191,12 @@ body {
   text-align: left;
   letter-spacing: .5px;
 }
-
 .inv-table th.right,  .inv-table td.right  { text-align: right; }
 .inv-table th.center, .inv-table td.center { text-align: center; }
 
 .inv-table tbody tr:nth-child(even) { background: var(--gray-light); }
 .inv-table tbody tr { border-bottom: 1px solid var(--gray-mid); }
 .inv-table tbody tr:last-child { border-bottom: 2px solid var(--purple); }
-
 .inv-table td {
   padding: 14px 16px;
   font-size: 13.5px;
@@ -212,13 +204,14 @@ body {
   vertical-align: middle;
 }
 
-/* Alamat klien — di bawah nama, bukan di samping */
-.client-address {
-  font-size: 13px;
-  color: var(--gray-text);
-  margin-bottom: 14px;
-  display: block;
+.harga-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
 }
+.harga-wrap .rp-label { font-size: 12px; color: #999; flex-shrink: 0; }
+.harga-wrap .harga-input { text-align: right; width: 120px; }
 
 .add-row-btn {
   display: inline-block;
@@ -251,7 +244,6 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 32px;
-  border-top: 2px solid var(--gray-mid);
   padding-top: 24px;
   align-items: start;
 }
@@ -266,15 +258,14 @@ body {
 }
 
 .totals { display: flex; flex-direction: column; gap: 8px; }
-
 .total-row {
   display: flex;
   justify-content: space-between;
   font-size: 13.5px;
   padding: 4px 0;
   color: #333;
+  align-items: center;
 }
-
 .total-row.grand {
   border-top: 2px solid var(--purple);
   margin-top: 6px;
@@ -285,24 +276,13 @@ body {
 }
 
 .signature-area { margin-top: 32px; text-align: center; }
-
 .sig-line {
   border-bottom: 1.5px solid var(--purple);
   width: 160px;
   margin: 36px auto 8px;
 }
 
-/* ── EDITABLE FIELDS ── */
-[contenteditable="true"] {
-  outline: none;
-  border-radius: 2px;
-  transition: background .15s;
-  min-width: 40px;
-  display: inline-block;
-}
-[contenteditable="true"]:hover { background: rgba(123, 94, 167, .07); }
-[contenteditable="true"]:focus { background: rgba(123, 94, 167, .12); outline: 1.5px dashed var(--purple); }
-
+/* ── INPUT FIELD ── */
 input.field {
   border: none;
   outline: none;
@@ -312,23 +292,24 @@ input.field {
   color: inherit;
   font-weight: inherit;
   width: 100%;
+  border-radius: 2px;
+  transition: background .15s;
 }
 input.field:hover { background: rgba(123, 94, 167, .07); }
-input.field:focus { background: rgba(123, 94, 167, .12); outline: 1.5px dashed var(--purple); border-radius: 2px; }
+input.field:focus { background: rgba(123, 94, 167, .12); outline: 1.5px dashed var(--purple); }
 input.field.right  { text-align: right; }
 input.field.center { text-align: center; }
 
 /* ── PRINT ── */
 @media print {
-  * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
   body { background: white; padding: 0; }
-  #toolbar { display: none; }
-  #invoice { box-shadow: none; padding: 32px; max-width: 100%; }
+  .toolbar { display: none; }
+  .invoice { box-shadow: none; padding: 32px; max-width: 100%; }
   .add-row-btn, .del-row { display: none !important; }
-  [contenteditable="true"] { outline: none; background: transparent !important; }
   input.field { background: transparent !important; outline: none !important; }
 }
+
+/* end of invoice */
+
+
