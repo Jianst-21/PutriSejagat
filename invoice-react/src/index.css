@@ -1,19 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap');
 
-/* ── CSS Variables ─────────────────────────────────────── */
+/* ── CSS Variables Global ──────────────────────────────── */
 :root {
-  --purple:      #7B5EA7;
-  --purple-dark: #5A3E85;
-  --orange:      #E8874A;
-  --blue-purple: #7B86C8;
-  --white:       #ffffff;
-  --bg:          #F0EDF6;
-  --gray-mid:    #DDD6EC;
-  --gray-text:   #6B6080;
-  --gray-light:  #F7F4FB;
+  --purple:       #8B5CF6;
+  --purple-dark:  #4B2C83;
+  --purple-light: #D8B4FE;
+  --purple-bg:    #F3E8FF;
+  --orange:       #E8874A;
+  --blue-purple:  #7B86C8;
+  --white:        #ffffff;
+  --bg:           #F5F6F8;
+  --gray-mid:     #E9D5FF;
+  --gray-text:    #6B6080;
+  --gray-light:   #FAFAFA;
+  --text-dark:    #1a1a1a;
+  --border-light: #E5E7EB;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── Reset Global (Sangat Penting Agar Layout Tidak Rusak) ── */
+* { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
 
 body {
   font-family: 'DM Sans', sans-serif;
@@ -21,347 +30,10 @@ body {
   min-height: 100vh;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   VERSI LAMA — PORTRAIT (masih aktif jika dipakai)
-   ═══════════════════════════════════════════════════════════ */
-
-/* ── TOOLBAR ── */
-.toolbar {
-  max-width: 900px;
-  margin: 0 auto 20px;
+/* ── LAYOUT PEMBUNGKUS (SIDEBAR + KONTEN) ── */
+.app-layout {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  padding: 20px 16px 0;
-}
-
-.btn {
-  padding: 9px 20px;
-  border: none;
-  border-radius: 6px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: opacity .2s, transform .1s;
-}
-.btn:hover  { opacity: .88; transform: translateY(-1px); }
-.btn:active { transform: translateY(0); }
-.btn-dark  { background: var(--purple-dark); color: var(--white); }
-.btn-white {
-  background: var(--white);
-  color: var(--purple-dark);
-  border: 1.5px solid var(--purple);
-}
-.btn-white:hover { background: var(--bg); }
-.btn-red { background: var(--orange); color: var(--white); }
-
-/* ── INVOICE WRAPPER (portrait) ── */
-.invoice {
-  max-width: 900px;
-  margin: 0 auto;
-  background: var(--white);
-  padding: 48px 56px;
-  box-shadow: 0 8px 40px rgba(123, 94, 167, .18);
-  border-top: 5px solid var(--purple);
-}
-.invoice > * { margin-bottom: 24px; }
-.invoice > *:last-child { margin-bottom: 0; }
-
-/* ── HEADER ── */
-.inv-header {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: start;
-  margin-bottom: 24px;
-  gap: 20px;
-}
-.invoice-label {
-  position: absolute;
-  top: -35px;
-  left: -40px;
-  font-size: 11px;
-  letter-spacing: 2px;
-  font-weight: 600;
-  color: var(--gray-text);
-}
-.header-left  { display: flex; align-items: center; }
-.header-right { display: flex; justify-content: flex-end; align-items: flex-start; }
-.header-right .company-info {
+  flex-direction: row; 
   width: 100%;
-  max-width: 360px;
-  margin-top: 16px;
-  margin-bottom: 8px;
-}
-.logo-area  { display: flex; align-items: center; gap: 14px; }
-.logo-img   { width: 80px; height: 80px; object-fit: contain; flex-shrink: 0; }
-.company-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  line-height: 1.25;
-  color: var(--purple-dark);
-  font-weight: 700;
-}
-.company-info {
-  margin-top: 14px;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  row-gap: 3px;
-  column-gap: 10px;
-  font-size: 13px;
-  color: var(--gray-text);
-}
-.company-info .lbl { font-weight: 600; color: var(--purple-dark); }
-
-/* ── BILLING + META ── */
-.inv-meta {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-.box-border {
-  border: 1.5px solid var(--gray-mid);
-  padding: 18px 22px;
-  border-radius: 6px;
-}
-.box-border.accent-left { border-left: 3px solid var(--purple); }
-.meta-label {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--blue-purple);
-  margin-bottom: 6px;
-}
-.client-name-display {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px;
-  color: var(--purple-dark);
-  margin-bottom: 4px;
-  font-weight: 700;
-}
-.client-address {
-  font-size: 13px;
-  color: var(--gray-text);
-  margin-bottom: 14px;
-  display: block;
-}
-.meta-row {
-  display: grid;
-  grid-template-columns: 110px 1fr;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 8px;
-  font-size: 13px;
-}
-.meta-row .lbl     { font-weight: 600; color: var(--purple-dark); }
-.due-date-row .lbl { font-weight: 700; color: var(--orange); }
-.due-date-row input { font-weight: 700; color: var(--orange); }
-.payment-box   { margin-top: 16px; }
-.payment-title {
-  font-weight: 700;
-  font-size: 13px;
-  border-bottom: 2px solid var(--purple);
-  padding-bottom: 5px;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: .5px;
-  color: var(--purple-dark);
-}
-
-/* ── TABLE ── */
-.inv-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 16px;
-}
-.inv-table thead tr { background: var(--purple-dark); color: var(--white); }
-.inv-table th {
-  padding: 12px 16px;
-  font-size: 13px;
-  font-weight: 600;
-  text-align: left;
-  letter-spacing: .5px;
-}
-.inv-table th.right,  .inv-table td.right  { text-align: right; }
-.inv-table th.center, .inv-table td.center { text-align: center; }
-.inv-table tbody tr:nth-child(even) { background: var(--gray-light); }
-.inv-table tbody tr { border-bottom: 1px solid var(--gray-mid); }
-.inv-table tbody tr:last-child { border-bottom: 2px solid var(--purple); }
-.inv-table td {
-  padding: 14px 16px;
-  font-size: 13.5px;
-  color: #333;
-  vertical-align: middle;
-}
-.harga-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 4px;
-}
-.harga-wrap .rp-label { font-size: 12px; color: #999; flex-shrink: 0; }
-.harga-wrap .harga-input { text-align: right; width: 120px; }
-.add-row-btn {
-  display: inline-block;
-  margin-bottom: 24px;
-  background: none;
-  border: 1.5px dashed var(--blue-purple);
-  color: var(--blue-purple);
-  padding: 8px 18px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 12px;
-  font-family: 'DM Sans', sans-serif;
-  transition: border-color .2s, color .2s, background .2s;
-}
-.add-row-btn:hover { border-color: var(--purple); color: var(--purple); background: var(--gray-light); }
-.del-row {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--orange);
-  font-size: 16px;
-  padding: 0 6px;
-  transition: color .2s;
-}
-.del-row:hover { color: #c0392b; }
-
-/* ── FOOTER ── */
-.inv-footer {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  padding-top: 24px;
-  align-items: start;
-}
-.totals { display: flex; flex-direction: column; gap: 8px; }
-.total-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 13.5px;
-  padding: 4px 0;
-  color: #333;
-  align-items: center;
-}
-.total-row.grand {
-  border-top: 2px solid var(--purple);
-  margin-top: 6px;
-  padding-top: 10px;
-  font-weight: 700;
-  font-size: 17px;
-  color: var(--purple-dark);
-}
-.signature-area { margin-top: 32px; text-align: center; }
-.sig-line {
-  border-bottom: 1.5px solid var(--purple);
-  width: 160px;
-  margin: 36px auto 8px;
-}
-
-/* ── INPUT FIELD ── */
-/* Tidak ada underline — hanya highlight lembut saat hover & focus */
-input.field {
-  border: none;
-  outline: none;
-  background: transparent;
-  font-family: 'DM Sans', sans-serif;
-  font-size: inherit;
-  color: inherit;
-  font-weight: inherit;
-  width: 100%;
-  padding: 2px 4px;
-  border-radius: 3px;
-  transition: background 0.15s;
-}
-input.field:hover { background: rgba(123, 94, 167, 0.06); }
-input.field:focus { background: rgba(123, 94, 167, 0.11); outline: 1.5px solid rgba(123, 94, 167, 0.3); }
-input.field.right  { text-align: right; }
-input.field.center { text-align: center; }
-
-/* ═══════════════════════════════════════════════════════════
-   VERSI BARU — LANDSCAPE (sidebar + faktur landscape)
-   ═══════════════════════════════════════════════════════════ */
-
-/* Scroll area & kertas — supaya bisa di-override dari React */
-.invoice-scroll-area {
-  background: var(--bg);
-}
-
-/* Hover & focus untuk inline-style inputs di versi landscape */
-.inv-ls input {
-  border: none;
-  outline: none;
-  background: transparent;
-  border-radius: 3px;
-  transition: background 0.15s;
-  font-family: 'DM Sans', sans-serif;
-}
-.inv-ls input:hover { background: rgba(123, 94, 167, 0.06); }
-.inv-ls input:focus { background: rgba(123, 94, 167, 0.11); outline: 1.5px solid rgba(123, 94, 167, 0.3); }
-
-/* Sidebar tombol — hover state tambahan */
-.sidebar-no-print button:hover {
-  filter: brightness(1.2);
-}
-
-/* ═══════════════════════════════════════════════════════════
-   PRINT — berlaku untuk KEDUA versi
-   ═══════════════════════════════════════════════════════════ */
-@media print {
-  * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-  }
-
-  /* Sembunyikan elemen UI */
-  .toolbar,
-  .sidebar-no-print,
-  .add-row-btn,
-  .del-row {
-    display: none !important;
-  }
-
-  /* Reset body */
-  body {
-    background: white;
-    padding: 0;
-    margin: 0;
-  }
-
-  /* Portrait versi lama */
-  .invoice {
-    box-shadow: none;
-    padding: 32px;
-    max-width: 100%;
-    border-top: 5px solid var(--purple-dark);
-  }
-
-  /* Landscape versi baru */
-  .invoice-scroll-area {
-    padding: 0 !important;
-    background: white !important;
-    display: block !important;
-  }
-  .invoice-paper {
-    box-shadow: none !important;
-    width: 100% !important;
-    min-height: unset !important;
-    padding: 20mm 18mm !important;
-  }
-
-  /* Input fields: no highlight saat print */
-  input.field,
-  .inv-ls input {
-    background: transparent !important;
-    outline: none !important;
-  }
-
-  /* Page size landscape untuk versi baru */
-  @page {
-    size: A4 landscape;
-    margin: 10mm;
-  }
+  min-height: 100vh;
 }

@@ -1,0 +1,29 @@
+/* ── Mengatur agar Sidebar & Konten bersebelahan ── */
+.dashboard-layout {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  width: 100%;
+  background: var(--bg, #F5F6F8);
+}
+
+/* ── Area Konten Kanan (Invoice, dll) ── */
+.main-content {
+  flex: 1; /* Memaksa konten mengisi sisa layar di sebelah sidebar */
+  min-width: 0; /* SANGAT PENTING: Mencegah invoice mendobrak lebar layar dan turun ke bawah */
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Membatasi tinggi agar bisa di-scroll di dalam */
+  overflow: hidden; /* Scroll diserahkan ke masing-masing halaman (seperti .invoice-scroll-area) */
+}
+
+/* ── Saat di-print, kita reset layoutnya agar full ── */
+@media print {
+  .dashboard-layout {
+    display: block !important;
+  }
+  .main-content {
+    height: auto !important;
+    overflow: visible !important;
+  }
+}

@@ -1,0 +1,118 @@
+.sidebar {
+  width: 280px; /* diperlebar */
+  height: 100vh;
+  background: linear-gradient(180deg, #0f0f2d, #1b1740);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 20px;
+  /* border-radius: 20px; rounded */
+}
+
+/* PROFILE */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.profile-name {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.profile-username {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* MENU */
+.menu {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* jarak diperlebar */
+}
+
+.menu-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  text-decoration: none;
+  color: white;
+  font-size: 15px; /* diperbesar */
+  transition: 0.2s;
+}
+
+/* ICON lebih besar */
+.menu-item svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* HOVER garis kiri */
+.menu-item::before {
+  content: "";
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 0;
+  background: white;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.menu-item:hover::before {
+  height: 24px;
+}
+
+/* ACTIVE */
+.menu-item.active {
+  background: #e5e5e5;
+  color: #a855f7;
+  font-weight: 600;
+}
+
+/* garis kiri saat active */
+.menu-item.active::before {
+  height: 24px;
+  background: white;
+}
+
+/* BOTTOM */
+.sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.bottom-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.bottom-item svg {
+  width: 20px;
+  height: 20px;
+}
+
+.bottom-item:hover {
+  opacity: 1;
+}

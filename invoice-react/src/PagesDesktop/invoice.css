@@ -1,0 +1,562 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600&display=swap');
+
+/* ── CSS Variables ─────────────────────────────────────── */
+:root {
+    --purple: #8B5CF6;
+    --purple-dark: #4B2C83;
+    --purple-light: #D8B4FE;
+    --purple-bg: #F3E8FF;
+    --orange: #E8874A;
+    --blue-purple: #7B86C8;
+    --white: #ffffff;
+    --bg: #F5F6F8;
+    --gray-mid: #E9D5FF;
+    --gray-text: #6B6080;
+    --gray-light: #FAFAFA;
+    --text-dark: #1a1a1a;
+    --border-light: #E5E7EB;
+}
+
+/* ── RESET GLOBAL (Agar tidak butuh index.css lagi) ── */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    /* Mengembalikan font yang hilang */
+    background: var(--bg);
+    min-height: 100vh;
+}
+
+/* ── LAYOUT UTAMA ── */
+.invoice-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    height: 100vh;
+}
+
+/* ── HEADER HALAMAN ── */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+}
+
+.page-header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.page-header-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: var(--white);
+}
+
+.page-header-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+    line-height: 1.2;
+}
+
+.page-header-right {
+    display: flex;
+    gap: 16px;
+}
+
+.btn-simpan,
+.btn-cetak {
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+.btn-simpan:hover,
+.btn-cetak:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn-simpan:active,
+.btn-cetak:active {
+    transform: translateY(0);
+}
+
+.btn-simpan {
+    background: var(--purple-bg);
+    color: var(--purple-dark);
+    border: 1px solid var(--purple-light);
+}
+
+.btn-cetak {
+    background: var(--purple-dark);
+    color: var(--white);
+    border: none;
+}
+
+/* ── AREA SCROLL & KERTAS ── */
+.invoice-scroll-area {
+    flex: 1;
+    overflow: auto;
+    padding: 0 48px 48px 48px;
+    width: 100%;
+}
+
+.invoice-paper {
+    width: 100%;
+    min-width: 980px;
+    max-width: 1122px;
+    margin: 0 auto;
+    background: var(--white);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 48px;
+    position: relative;
+    color: var(--text-dark);
+}
+
+/* ── HEADER FAKTUR ── */
+.inv-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid var(--purple-light);
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.company-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--purple-dark);
+    white-space: pre-line;
+    line-height: 1.2;
+}
+
+.faktur-label {
+    font-size: 14px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 8px;
+    color: #888;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.company-info {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 4px 12px;
+    /* Tambahkan ini agar teks yang panjang tidak membuat row berantakan */
+    align-items: flex-start;
+    font-size: 10px;
+    color: #555;
+}
+
+.address-text {
+    max-width: 200px;
+    /* Kamu bisa sesuaikan angka ini (misal 180px atau 220px) */
+    line-height: 1.4;
+    /* Memberi jarak antar baris agar enak dibaca saat jadi 2 baris */
+    word-wrap: break-word;
+}
+
+.company-info .lbl {
+    font-weight: 700;
+    color: var(--purple);
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.company-info.payment-info {
+    grid-template-columns: 70px 1fr;
+}
+
+/* ── META TAGIHAN ── */
+.inv-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 24px;
+}
+
+.meta-box-compact {
+    border: 1px solid var(--gray-mid);
+    border-radius: 8px;
+    padding: 12px 16px;
+    background: var(--gray-light);
+}
+
+.meta-box.accent-left {
+    border-left: 4px solid var(--purple);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--gray-mid);
+    border-radius: 8px;
+    padding: 16px;
+    background: var(--gray-light);
+}
+
+.meta-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--purple);
+    margin-bottom: 8px;
+}
+
+.client-name {
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    color: var(--text-dark);
+    margin-bottom: 4px;
+    padding-left: 0 !important;
+    /* Tarik teks ke kiri agar sejajar */
+}
+
+.client-address-area {
+    resize: none;
+    height: 36px;
+    margin-bottom: 6px;
+    padding-left: 0 !important;
+    /* Tarik teks ke kiri agar sejajar */
+}
+
+.meta-right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.meta-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 20px;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 6px;
+    font-size: 11px;
+}
+
+.meta-row-last {
+    margin-bottom: 0;
+}
+
+.meta-row .lbl {
+    font-weight: 700;
+    color: var(--purple);
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.payment-title {
+    font-weight: 700;
+    font-size: 11px;
+    color: var(--purple-dark);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+/* ── TABEL ── */
+.inv-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    margin-bottom: 12px;
+}
+
+.inv-table th {
+    background: var(--purple-dark);
+    color: var(--white);
+    padding: 10px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: left;
+}
+
+.inv-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-light);
+    vertical-align: middle;
+}
+
+.col-qty {
+    width: 80px;
+    text-align: center !important;
+}
+
+.col-harga {
+    width: 200px;
+    text-align: center !important;
+}
+
+.col-total {
+    width: 200px;
+    text-align: center !important;
+}
+
+.col-action {
+    width: 40px;
+    text-align: center !important;
+}
+
+.td-center {
+    text-align: center;
+}
+
+.harga-wrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: center;
+}
+
+.input-harga {
+    width: 100px;
+    text-align: center;
+}
+
+.rp-label {
+    font-size: 12px;
+    color: #888;
+}
+
+.add-row-btn {
+    font-size: 11px;
+    color: var(--purple);
+    background: none;
+    border: 1px dashed var(--purple);
+    border-radius: 4px;
+    padding: 6px 16px;
+    cursor: pointer;
+    margin-bottom: 32px;
+    font-family: inherit;
+    transition: background 0.2s;
+}
+
+.add-row-btn:hover {
+    background: var(--purple-bg);
+}
+
+.del-row {
+    background: none;
+    border: none;
+    color: #EF4444;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+}
+
+/* ── FOOTER & TANDA TANGAN ── */
+.inv-footer {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 32px;
+    border-top: 2px solid var(--purple-light);
+    padding-top: 24px;
+}
+
+.signatures-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 10px;
+}
+
+.signature-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sig-caption {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 100px;
+}
+
+.sig-line {
+    width: 80%;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 4px;
+}
+
+.signer-input {
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--text-dark);
+    text-align: center;
+}
+
+/* ── TOTAL ── */
+.totals {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    padding: 4px 0;
+    color: var(--text-dark);
+}
+
+.total-row-grand {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--purple-dark);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 2px solid var(--purple-dark);
+    padding: 12px 0;
+    margin-top: 8px;
+}
+
+/* ── PAJAK & DISKON INPUT (Tanpa Kotak, Teks Saja) ── */
+.tax-discount-wrap {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    /* Jarak rapat */
+    white-space: nowrap;
+}
+
+.pajak-diskon-input {
+    width: 24px;
+    text-align: center;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    /* Pastikan font sama */
+    color: var(--text-dark);
+
+    /* Hilangkan semua kotak dan garis */
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: textfield !important;
+
+    padding: 0;
+    margin: 0;
+}
+
+.pajak-diskon-input::-webkit-outer-spin-button,
+.pajak-diskon-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Hanya beri highlight tipis kalau diklik */
+.pajak-diskon-input:hover,
+.pajak-diskon-input:focus {
+    background: rgba(139, 92, 246, 0.1) !important;
+    border-radius: 4px;
+}
+
+/* ── INPUT FIELD GENERAL ── */
+.field {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: inherit;
+    color: inherit;
+    width: 100%;
+    padding: 2px 4px;
+    font-family: inherit;
+    border-radius: 3px;
+    transition: background 0.15s;
+}
+
+.field:hover {
+    background: rgba(139, 92, 246, 0.06);
+}
+
+.field:focus {
+    background: rgba(139, 92, 246, 0.11);
+    outline: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+/* ── PRINT RULES ── */
+@media print {
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    body {
+        background: white;
+        margin: 0;
+        padding: 0;
+    }
+
+    .no-print,
+    .add-row-btn,
+    .del-row {
+        display: none !important;
+    }
+
+    .invoice-wrapper {
+        margin-left: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        display: block !important;
+    }
+
+    .invoice-scroll-area {
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+
+    .invoice-paper {
+        box-shadow: none !important;
+        width: 100% !important;
+        min-width: unset !important;
+        min-height: unset !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .field:hover,
+    .field:focus,
+    .pajak-diskon-input:hover,
+    .pajak-diskon-input:focus {
+        background: transparent !important;
+        outline: none !important;
+    }
+
+    @page {
+        size: A4 landscape;
+        margin: 10mm;
+    }
+}
