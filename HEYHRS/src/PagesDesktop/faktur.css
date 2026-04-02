@@ -26,7 +26,6 @@
 
 body {
     font-family: 'DM Sans', sans-serif;
-    /* Mengembalikan font yang hilang */
     background: var(--bg);
     min-height: 100vh;
 }
@@ -126,9 +125,11 @@ body {
     margin: 0 auto;
     background: var(--white);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    padding: 48px;
+    padding: 48px 48px 40px 48px;
     position: relative;
     color: var(--text-dark);
+    /* Tinggi mengikuti konten, tidak ada sisa ruang kosong */
+    height: fit-content;
 }
 
 /* ── HEADER FAKTUR ── */
@@ -148,8 +149,8 @@ body {
 }
 
 .logo-img {
-    width: 40px;
-    height: 40px;
+    width: 64px;
+    height: 64px;
     object-fit: contain;
 }
 
@@ -174,7 +175,6 @@ body {
     display: grid;
     grid-template-columns: 50px 1fr;
     gap: 4px 12px;
-    /* Tambahkan ini agar teks yang panjang tidak membuat row berantakan */
     align-items: flex-start;
     font-size: 10px;
     color: #555;
@@ -182,9 +182,7 @@ body {
 
 .address-text {
     max-width: 200px;
-    /* Kamu bisa sesuaikan angka ini (misal 180px atau 220px) */
     line-height: 1.4;
-    /* Memberi jarak antar baris agar enak dibaca saat jadi 2 baris */
     word-wrap: break-word;
 }
 
@@ -239,7 +237,6 @@ body {
     color: var(--text-dark);
     margin-bottom: 4px;
     padding-left: 0 !important;
-    /* Tarik teks ke kiri agar sejajar */
 }
 
 .client-address-area {
@@ -247,7 +244,6 @@ body {
     height: 36px;
     margin-bottom: 6px;
     padding-left: 0 !important;
-    /* Tarik teks ke kiri agar sejajar */
 }
 
 .meta-right-col {
@@ -263,6 +259,7 @@ body {
     gap: 4px;
     margin-bottom: 6px;
     font-size: 11px;
+  
 }
 
 .meta-row-last {
@@ -284,6 +281,16 @@ body {
     text-transform: uppercase;
 }
 
+/* ── NO FAKTUR DISPLAY ── */
+.no-faktur-display {
+    font-weight: 600;
+    color: var(--text-dark); /* lebih soft dari yang gelap */
+    font-size: 11px;
+
+    display: flex;
+    align-items: center;
+    padding: 2px 4px; /* biar konsisten dengan .field */
+}
 /* ── TABEL ── */
 .inv-table {
     width: 100%;
@@ -441,12 +448,11 @@ body {
     margin-top: 8px;
 }
 
-/* ── PAJAK & DISKON INPUT (Tanpa Kotak, Teks Saja) ── */
+/* ── PAJAK & DISKON INPUT ── */
 .tax-discount-wrap {
     display: flex;
     align-items: center;
     gap: 2px;
-    /* Jarak rapat */
     white-space: nowrap;
 }
 
@@ -455,10 +461,7 @@ body {
     text-align: center;
     font-size: 14px;
     font-family: 'DM Sans', sans-serif;
-    /* Pastikan font sama */
     color: var(--text-dark);
-
-    /* Hilangkan semua kotak dan garis */
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
@@ -466,7 +469,6 @@ body {
     appearance: none !important;
     -webkit-appearance: none !important;
     -moz-appearance: textfield !important;
-
     padding: 0;
     margin: 0;
 }
@@ -477,7 +479,6 @@ body {
     margin: 0;
 }
 
-/* Hanya beri highlight tipis kalau diklik */
 .pajak-diskon-input:hover,
 .pajak-diskon-input:focus {
     background: rgba(139, 92, 246, 0.1) !important;
@@ -514,8 +515,10 @@ body {
         print-color-adjust: exact !important;
     }
 
-    body {
-        background: white;
+    body,
+    html {
+        background: #ffffff !important;
+        background-color: #ffffff !important;
         margin: 0;
         padding: 0;
     }
@@ -531,11 +534,15 @@ body {
         width: 100% !important;
         max-width: 100% !important;
         display: block !important;
+        background: #ffffff !important;
+        height: auto !important;
     }
 
     .invoice-scroll-area {
         padding: 0 !important;
         overflow: visible !important;
+        background: #ffffff !important;
+        height: auto !important;
     }
 
     .invoice-paper {
@@ -543,8 +550,16 @@ body {
         width: 100% !important;
         min-width: unset !important;
         min-height: unset !important;
-        padding: 0 !important;
+        height: auto !important;
+        padding: 8mm !important;
         margin: 0 !important;
+        background: #ffffff !important;
+    }
+
+    /* Hilangkan background abu-abu dari semua box saat print */
+    .meta-box-compact,
+    .meta-box.accent-left {
+        background: #ffffff !important;
     }
 
     .field:hover,
@@ -558,5 +573,6 @@ body {
     @page {
         size: A4 landscape;
         margin: 10mm;
+        background: #ffffff;
     }
 }
