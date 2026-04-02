@@ -13,7 +13,7 @@ export default function Sidebar() {
 
     const menu = [
         { name: 'Dashboard', path: '/', icon: <LayoutDashboard size={22} /> },
-        { name: 'Faktur', path: '/invoice', icon: <FileText size={22} /> },
+        { name: 'Faktur', path: '/faktur', icon: <FileText size={22} /> },
         { name: 'User', path: '/user', icon: <User size={22} /> },
     ];
 
