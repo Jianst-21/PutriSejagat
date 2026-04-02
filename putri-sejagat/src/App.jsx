@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 
 import DashboardLayout from './layout/DashboardLayout.jsx';
-import Invoice from './PagesDesktop/invoice.jsx';
+import faktur from './PagesDesktop/faktur.jsx';
 
 
 function App() {
@@ -22,10 +22,10 @@ function App() {
 
         {/* Invoice 1 */}
         <Route
-          path="/invoice"
+          path="/faktur"
           element={
             <DashboardLayout>
-              <Invoice />
+              <faktur />
             </DashboardLayout>
           }
         />

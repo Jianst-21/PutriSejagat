@@ -2,7 +2,7 @@ import { useState } from 'react';
 import logo from '../assets/Logo.png';
 import { supabase } from '../lib/supabase';
 import { Printer, Save } from 'lucide-react';
-import './invoice.css'; // Hanya panggil ini, tidak butuh index.css lagi
+import './faktur.css'; // Hanya panggil ini, tidak butuh index.css lagi
 // ── Format Rupiah ──
 const fmt = (n) => 'Rp. ' + Number(n).toLocaleString('id-ID', { minimumFractionDigits: 2 });
 
@@ -21,13 +21,12 @@ const DEFAULT_CLIENT = {
   mail: 'hello@reallygreatsite.com',
   web: 'www.reallygreatsite.com',
 };
-const DEFAULT_INVOICE = { noFaktur: 'inv-1234567890', tanggal: '2026-12-12', jatuhTempo: '2026-12-17' };
+const DEFAULT_INVOICE = { noFaktur: 'NF001', tanggal: '2026-2-12', jatuhTempo: '2026-2-17' };
 const DEFAULT_PAYMENT = { note: '', atasNama: 'PT. Putri Jagad Raya Jaya Abadi', namaBank: 'Bank Kota Borcelle', noRek: '#123/456/7890' };
 const DEFAULT_ROWS = [
-  { id: 1, desc: 'Barang A', qty: 1, harga: 15000000 },
-  { id: 2, desc: 'Barang B', qty: 1, harga: 1000000 },
+  { id: 1, desc: 'Deadoran Spray Heyhrs (60Ml)', qty: 1, harga: 49000 },
 ];
-const DEFAULT_FOOTER = { syarat: '', signerLeft: 'Direktur Utama', signerRight: 'Penerima' };
+const DEFAULT_FOOTER = { syarat: '', signerLeft: 'Pengirim', signerRight: 'Penerima' };
 
 export default function Invoice() {
   const [company, setCompany] = useState(DEFAULT_COMPANY);
