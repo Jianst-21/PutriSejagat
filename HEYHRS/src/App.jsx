@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 
 import DashboardLayout from './layout/DashboardLayout.jsx';
-import faktur from './PagesDesktop/faktur.jsx';
+import Faktur from './PagesDesktop/faktur.jsx';
 
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
           path="/faktur"
           element={
             <DashboardLayout>
-              <faktur />
+              <Faktur />
             </DashboardLayout>
           }
         />
