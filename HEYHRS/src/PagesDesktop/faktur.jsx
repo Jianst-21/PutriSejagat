@@ -116,7 +116,10 @@ export default function Invoice() {
       <div className="page-header no-print">
         <div className="page-header-left">
           <img className="page-header-logo" src={logo} alt="Logo" />
-          <div className="page-header-title">PT. Putri Jagad<br />Raya Jaya Abadi</div>
+          <div>
+            <div className="page-header-brand">PT. Putri Jagad Raya Jaya Abadi</div>
+            <div className="page-header-subtitle">Sales Invoice</div>
+          </div>
         </div>
         <div className="page-header-right">
           <button className="btn-simpan" onClick={saveData}>
