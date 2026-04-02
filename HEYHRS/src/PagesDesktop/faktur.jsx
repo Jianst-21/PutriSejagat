@@ -19,7 +19,6 @@ const DEFAULT_CLIENT = {
   address: '123 Anywhere St., Any City, ST 12345',
   telp: '+123-456-7890',
   mail: 'hello@reallygreatsite.com',
-  web: 'www.reallygreatsite.com',
 };
 const DEFAULT_INVOICE = { noFaktur: 'NF001', tanggal: '2026-2-12', jatuhTempo: '2026-2-17' };
 const DEFAULT_PAYMENT = { note: '', atasNama: 'PT. Putri Jagad Raya Jaya Abadi', namaBank: 'Bank Kota Borcelle', noRek: '#123/456/7890' };
@@ -64,6 +63,7 @@ export default function Invoice() {
   const upd = (setter) => (field) => (e) => setter((prev) => ({ ...prev, [field]: e.target.value }));
 
   return (
+    
     <div className="invoice-wrapper">
 
       {/* ── HEADER HALAMAN ── */}
