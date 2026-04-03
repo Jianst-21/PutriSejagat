@@ -33,14 +33,14 @@ const generateNoFaktur = async () => {
 const DEFAULT_COMPANY = {
   name: 'PT. Putri Jagad Raya\nJaya Abadi',
   alamat: 'PERUM MENDUT BLOK N-22, RT. 003, RW. 004, TAMANBARU, BANYUWANGI,',
-  telp: '+123-456-7890',
-  mail: 'hello@putrijagad.com',
+  telp: '+62 85113124668',
+  mail: 'putrijagadrayajayaabadi@gmail.com',
   web: 'heyhrs.vercel.app',
 };
 const DEFAULT_CLIENT = {
   name: 'BAMBANG YUDISTIRA',
   address: 'Jln Anggrek No 71',
-  telp: '085064477225',
+  telp: '+62 85064477225',
   mail: 'bambangyudis@gmail.com',
 };
 const DEFAULT_INVOICE = { noFaktur: '', tanggal: '2026-2-12', jatuhTempo: '2026-2-17' };
